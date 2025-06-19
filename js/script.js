@@ -7,6 +7,13 @@ JavaScript Functionality
 
 // Wait for DOM to be fully loaded
 document.addEventListener('DOMContentLoaded', function() {
+    // Prevent pinch zoom on mobile
+    document.addEventListener('touchmove', function (event) {
+        if (event.scale !== 1) { 
+            event.preventDefault();
+        }
+    }, { passive: false });
+    
     // Initialize AOS (Animate On Scroll)
     AOS.init({
         duration: 800,
