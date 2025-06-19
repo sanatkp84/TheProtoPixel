@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thumbnail Designs - TheProtoPixel</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- AOS Animation Library -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <style>
+        /* Additional styles specific to portfolio pages */
+        .portfolio-header {
+            background-color: var(--dark-color);
+            padding: 120px 0 60px;
+            color: white;
+            text-align: center;
+        }
+        
+        .portfolio-header h1 {
+            margin-bottom: 10px;
+        }
+        
+        .portfolio-header p {
+            color: rgba(255, 255, 255, 0.8);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .portfolio-gallery {
+            padding: 60px 0;
+        }
+        
+        .portfolio-gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+        
+        .portfolio-gallery-item {
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            opacity: 1;
+        }
+        
+        .portfolio-gallery-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(108, 99, 255, 0.2);
+        }
+        
+        .portfolio-gallery-img {
+            position: relative;
+            padding-top: 56.25%; /* 16:9 Aspect Ratio */
+            overflow: hidden;
+        }
+        
+        .portfolio-gallery-img img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .portfolio-gallery-item:hover .portfolio-gallery-img img {
+            transform: scale(1.1);
+        }
+        
+        .portfolio-gallery-info {
+            padding: 20px;
+            background-color: white;
+        }
+        
+        .portfolio-gallery-info h3 {
+            margin-bottom: 5px;
+            font-size: 1.2rem;
+        }
+        
+        .portfolio-gallery-info p {
+            color: var(--gray-color);
+            margin-bottom: 10px;
+            font-size: 0.9rem;
+        }
+        
+        .portfolio-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 5px;
+        }
+        
+        .portfolio-tag {
+            background-color: #f0f0f0;
+            color: var(--gray-color);
+            padding: 3px 10px;
+            border-radius: 50px;
+            font-size: 0.8rem;
+        }
+        
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            color: white;
+            margin-bottom: 20px;
+        }
+        
+        .back-link i {
+            margin-right: 5px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar scrolled">
+        <div class="container">
+            <div class="logo">
+                <a href="../index.html">
+                    <img src="../images/my logo.png" alt="TheProtoPixel Logo" class="site-logo">
+                    <span class="logo-text"><span class="highlight">TheProto</span>Pixel</span>
+                </a>
+            </div>
+            <div class="nav-toggle" id="navToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="../index.html#home" class="nav-link">Home</a></li>
+                <li><a href="../index.html#services" class="nav-link">Services</a></li>
+                <li><a href="../index.html#portfolio" class="nav-link">Portfolio</a></li>
+                <li><a href="../index.html#clients" class="nav-link">Clients</a></li>
+                <li><a href="../index.html#testimonials" class="nav-link">Testimonials</a></li>
+                <li><a href="../index.html#pricing" class="nav-link">Pricing</a></li>
+                <li><a href="../index.html#contact" class="nav-link">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Portfolio Header -->
+    <header class="portfolio-header">
+        <div class="container">
+            <a href="../index.html#portfolio" class="back-link">
+                <i class="fas fa-arrow-left"></i> Back to Portfolio
+            </a>
+            <h1>Thumbnail Designs</h1>
+            <p>Eye-catching YouTube and video thumbnails that drive clicks and engagement</p>
+        </div>
+    </header>
+
+    <!-- Portfolio Gallery -->
+    <section class="portfolio-gallery">
+        <div class="container">
+            <!-- Search and Filter -->
+            <div class="portfolio-search">
+                <input type="text" placeholder="Search by title or tag...">
+                <button><i class="fas fa-search"></i></button>
+            </div>
+            
+            <div class="portfolio-filter">
+                <button class="filter-btn active" data-filter="all">All</button>
+                <button class="filter-btn" data-filter="minimal">Minimal</button>
+                <button class="filter-btn" data-filter="bold">Bold</button>
+                <button class="filter-btn" data-filter="tech">Tech</button>
+                <button class="filter-btn" data-filter="lifestyle">Lifestyle</button>
+                <button class="filter-btn" data-filter="gaming">Gaming</button>
+                <button class="filter-btn" data-filter="education">Education</button>
+                <button class="filter-btn" data-filter="irl">IRL</button>
+            </div>
+            
+            <!-- Portfolio Items -->
+            <div class="portfolio-gallery-grid">
+                <!-- Item 1 -->
+                <div class="portfolio-gallery-item" data-tags="education tech minimal" data-aos="fade-up">
+                    <div class="portfolio-gallery-img">
+                        <img src="../images/IT/Docker One Shot.jpg" alt="Tech Tutorial Thumbnail">
+                    </div>
+                    <div class="portfolio-gallery-info">
+                        <h3>Tech Tutorial Series</h3>
+                        <p>Clean, minimal design for a tech tutorial channel</p>
+                        <div class="portfolio-tags">
+                            <span class="portfolio-tag">minimal</span>
+                            <span class="portfolio-tag">tech</span>
+                            <span class="portfolio-tag">education</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Item 2 -->
+                <div class="portfolio-gallery-item" data-tags="irl lifestyle" data-aos="fade-up" data-aos-delay="100">
+                    <div class="portfolio-gallery-img">
+                        <img src="../images/IT/FINAL 22 VS 28.jpg" alt="Gaming Review Thumbnail">
+                    </div>
+                    <div class="portfolio-gallery-info">
+                        <h3>Comparison IRL Thumbnails</h3>
+                        <p>Bold, eye-catching design for gaming content</p>
+                        <div class="portfolio-tags">
+                            <span class="portfolio-tag">lifestyle</span>
+                            <span class="portfolio-tag">irl</span>
+                            <span class="portfolio-tag">comparison</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Item 3 -->
+                <div class="portfolio-gallery-item" data-tags="education minimal" data-aos="fade-up" data-aos-delay="200">
+                    <div class="portfolio-gallery-img">
+                        <img src="../images/IT/SAVINDER PURI PODCAST.jpg" alt="Lifestyle Vlog Thumbnail">
+                    </div>
+                    <div class="portfolio-gallery-info">
+                        <h3>Podcast Videos</h3>
+                        <p>Clean, aesthetic design for Podcast content</p>
+                        <div class="portfolio-tags">
+                            <span class="portfolio-tag">minimal</span>
+                            <span class="portfolio-tag">education</span>
+                            <span class="portfolio-tag">podcast</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Item 4 -->
+                <div class="portfolio-gallery-item" data-tags="bold education irl" data-aos="fade-up" data-aos-delay="300">
+                    <div class="portfolio-gallery-img">
+                        <img src="../images/IT/resume copy.jpg" alt="Tech Review Thumbnail">
+                    </div>
+                    <div class="portfolio-gallery-info">
+                        <h3>Resume Making Video</h3>
+                        <p>Bold, attention-grabbing IRL Thumbnails</p>
+                        <div class="portfolio-tags">
+                            <span class="portfolio-tag">bold</span>
+                            <span class="portfolio-tag">education</span>
+                            <span class="portfolio-tag">irl</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Item 5 -->
+                <div class="portfolio-gallery-item" data-tags="minimal tech" data-aos="fade-up" data-aos-delay="400">
+                    <div class="portfolio-gallery-img">
+                        <img src="../images/IT/My First Remote Job.jpg" alt="Coding Tutorial Thumbnail">
+                    </div>
+                    <div class="portfolio-gallery-info">
+                        <h3>Remote Job Videos</h3>
+                        <p>Clean, social media, hologram design</p>
+                        <div class="portfolio-tags">
+                            <span class="portfolio-tag">minimal</span>
+                            <span class="portfolio-tag">tech</span>
+                            <span class="portfolio-tag">remote</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Item 6 -->
+                <div class="portfolio-gallery-item" data-tags="bold tech gaming" data-aos="fade-up" data-aos-delay="500">
+                    <div class="portfolio-gallery-img">
+                        <img src="../images/IT/ai & k8s final copy.jpg" alt="Gaming Stream Thumbnail">
+                    </div>
+                    <div class="portfolio-gallery-info">
+                        <h3>AI, Kubernetes & DevOps Video</h3>
+                        <p>Dynamic, Vibrant design for AI content</p>
+                        <div class="portfolio-tags">
+                            <span class="portfolio-tag">hologram</span>
+                            <span class="portfolio-tag">tech</span>
+                            <span class="portfolio-tag">AI</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <a href="../index.html">
+                        <img src="../images/my logo.png" alt="TheProtoPixel Logo" class="footer-site-logo">
+                        <span class="footer-logo-text"><span class="highlight">TheProto</span>Pixel</span>
+                    </a>
+                    <p>Designs That Speak. Creativity That Converts.</p>
+                </div>
+                <div class="footer-links">
+                    <div class="footer-column">
+                        <h4>Quick Links</h4>
+                        <ul>
+                            <li><a href="../index.html#home">Home</a></li>
+                            <li><a href="../index.html#services">Services</a></li>
+                            <li><a href="../index.html#portfolio">Portfolio</a></li>
+                            <li><a href="../index.html#clients">Clients</a></li>
+                            <li><a href="../index.html#pricing">Pricing</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-column">
+                        <h4>Portfolio</h4>
+                        <ul>
+                            <li><a href="thumbnails.html">Thumbnails</a></li>
+                            <li><a href="shorts.html">Short Videos</a></li>
+                            <li><a href="social-media.html">Social Media</a></li>
+                            <li><a href="events.html">Event Creatives</a></li>
+                            <li><a href="posters.html">Posters</a></li>
+                            <li><a href="invitations.html">Invitations</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-column">
+                        <h4>Connect</h4>
+                        <ul>
+                            <li><a href="#"><i class="fab fa-instagram"></i> Instagram</a></li>
+                            <li><a href="#"><i class="fab fa-behance"></i> Behance</a></li>
+                            <li><a href="#"><i class="fab fa-dribbble"></i> Dribbble</a></li>
+                            <li><a href="#"><i class="fab fa-linkedin"></i> LinkedIn</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 TheProtoPixel. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <a href="#" class="back-to-top active">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+
+    <!-- Scripts -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="../js/script.js"></script>
+</body>
+</html>
