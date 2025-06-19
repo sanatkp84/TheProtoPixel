@@ -33,6 +33,7 @@ TheProtoPixel - Creative Design Agency
 
 html {
     scroll-behavior: smooth;
+    height: 100%;
 }
 
 body {
@@ -44,6 +45,7 @@ body {
     overflow-x: hidden;
     width: 100%;
     position: relative;
+    min-height: 100%;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -1541,6 +1543,8 @@ section {
         overflow-x: hidden;
         width: 100%;
         position: relative;
+        height: auto;
+        -webkit-overflow-scrolling: touch;
     }
 }
 
@@ -1549,7 +1553,9 @@ section {
     background: transparent !important;
 }
 
-/* Prevent page zoom on mobile */
-html {
-    touch-action: manipulation;
+/* Touch handling for mobile */
+@media (max-width: 992px) {
+    body {
+        touch-action: pan-y;
+    }
 }
