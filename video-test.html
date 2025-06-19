@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Video Test</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        h1 {
+            color: #6c63ff;
+        }
+        .video-container {
+            margin: 20px 0;
+        }
+        video {
+            max-width: 100%;
+            border: 1px solid #ddd;
+        }
+        .controls {
+            margin: 10px 0;
+        }
+        button {
+            padding: 8px 16px;
+            background: #6c63ff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-right: 10px;
+        }
+        .status {
+            margin: 20px 0;
+            padding: 10px;
+            background: #f5f5f5;
+            border-left: 4px solid #6c63ff;
+        }
+    </style>
+</head>
+<body>
+    <h1>Video Test Page</h1>
+    <p>This page tests if your video can play in the browser.</p>
+    
+    <div class="video-container">
+        <video id="testVideo" src="videos/client-VP-2-NEW GRAPHICS.mov" width="400" preload="metadata"></video>
+        
+        <div class="controls">
+            <button onclick="document.getElementById('testVideo').play()">Play</button>
+            <button onclick="document.getElementById('testVideo').pause()">Pause</button>
+            <button onclick="document.getElementById('testVideo').muted = !document.getElementById('testVideo').muted">Toggle Mute</button>
+        </div>
+        
+        <div class="status" id="status">
+            Status: Ready to test
+        </div>
+    </div>
+    
+    <h2>Video Information:</h2>
+    <div id="videoInfo">Loading...</div>
+    
+    <script>
+        const video = document.getElementById('testVideo');
+        const status = document.getElementById('status');
+        const videoInfo = document.getElementById('videoInfo');
+        
+        // Update status
+        function updateStatus(message) {
+            status.textContent = 'Status: ' + message;
+        }
+        
+        // Event listeners
+        video.addEventListener('loadedmetadata', () => {
+            updateStatus('Metadata loaded');
+            updateVideoInfo();
+        });
+        
+        video.addEventListener('canplay', () => {
+            updateStatus('Video can play');
+        });
+        
+        video.addEventListener('playing', () => {
+            updateStatus('Video is playing');
+        });
+        
+        video.addEventListener('pause', () => {
+            updateStatus('Video is paused');
+        });
+        
+        video.addEventListener('error', (e) => {
+            updateStatus('Error: ' + (video.error ? video.error.message : 'Unknown error'));
+            console.error('Video error:', video.error);
+        });
+        
+        // Update video information
+        function updateVideoInfo() {
+            videoInfo.innerHTML = `
+                <ul>
+                    <li>Duration: ${video.duration.toFixed(2)} seconds</li>
+                    <li>Width: ${video.videoWidth}px</li>
+                    <li>Height: ${video.videoHeight}px</li>
+                    <li>Ready State: ${video.readyState}</li>
+                    <li>Network State: ${video.networkState}</li>
+                    <li>Source: ${video.currentSrc}</li>
+                </ul>
+            `;
+        }
+        
+        // Initial check
+        if (video.readyState > 0) {
+            updateVideoInfo();
+        }
+    </script>
+</body>
+</html>

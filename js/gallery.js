@@ -1,91 +1,113 @@
-/*
-==============================================
-TheProtoPixel - Gallery Pages JavaScript
-==============================================
-*/
+/**
+ * Video Gallery Functionality
+ * Handles play/pause functionality for video items in the portfolio gallery
+ */
 
-// Wait for DOM to be fully loaded
 document.addEventListener('DOMContentLoaded', function() {
-    // Initialize AOS (Animate On Scroll)
-    AOS.init({
-        duration: 800,
-        easing: 'ease-in-out',
-        once: true,
-        mirror: false
-    });
-
-    // Navbar functionality
-    const navbar = document.querySelector('.navbar');
-    const navToggle = document.getElementById('navToggle');
-    const navMenu = document.querySelector('.nav-menu');
-    const backToTop = document.querySelector('.back-to-top');
+    console.log('Gallery JS loaded');
     
-    // Mobile menu toggle
-    if (navToggle) {
-        navToggle.addEventListener('click', function() {
-            navToggle.classList.toggle('active');
-            navMenu.classList.toggle('active');
-        });
-    }
-
-    // Close mobile menu when clicking a nav link
-    const navLinks = document.querySelectorAll('.nav-link');
+    // Get all video overlays
+    const videoOverlays = document.querySelectorAll('.video-overlay');
+    console.log('Found video overlays:', videoOverlays.length);
     
-    navLinks.forEach(link => {
-        link.addEventListener('click', function() {
-            navToggle.classList.remove('active');
-            navMenu.classList.remove('active');
-        });
-    });
-
-    // Show/hide back to top button on scroll
-    window.addEventListener('scroll', function() {
-        if (window.scrollY > 300) {
-            backToTop.classList.add('active');
-        } else {
-            backToTop.classList.remove('active');
-        }
-    });
-
-    // Smooth scroll for back to top button
-    backToTop.addEventListener('click', function(e) {
-        e.preventDefault();
-        window.scrollTo({
-            top: 0,
-            behavior: 'smooth'
-        });
-    });
-
-    // Gallery filtering functionality
-    const galleryCategories = document.querySelectorAll('.gallery-category');
-    const galleryItems = document.querySelectorAll('.gallery-item');
-    
-    galleryCategories.forEach(category => {
-        category.addEventListener('click', function() {
-            // Remove active class from all categories
-            galleryCategories.forEach(cat => cat.classList.remove('active'));
+    // Add click event to each overlay
+    videoOverlays.forEach((overlay, index) => {
+        console.log('Setting up overlay', index);
+        
+        overlay.addEventListener('click', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
             
-            // Add active class to clicked category
-            this.classList.add('active');
+            console.log('Overlay clicked');
+            const videoContainer = this.closest('.portfolio-gallery-img');
+            const video = videoContainer.querySelector('video');
             
-            const selectedCategory = this.getAttribute('data-category');
+            console.log('Video element:', video);
             
-            // Filter gallery items
-            galleryItems.forEach(item => {
-                // First remove the show class
-                item.classList.remove('show');
-                
-                // If "all" category is selected or item matches selected category
-                if (selectedCategory === 'all' || item.classList.contains(selectedCategory)) {
-                    // Add show class with a slight delay for staggered animation
-                    setTimeout(() => {
-                        item.classList.add('show');
-                    }, Math.random() * 200); // Random delay for more natural animation
+            if (video) {
+                try {
+                    if (video.paused) {
+                        console.log('Attempting to play video');
+                        
+                        // Pause all other videos first
+                        document.querySelectorAll('video').forEach(v => {
+                            if (v !== video) {
+                                v.pause();
+                                // Show overlay for other videos
+                                const otherOverlay = v.parentElement.querySelector('.video-overlay');
+                                if (otherOverlay) {
+                                    otherOverlay.style.opacity = '1';
+                                }
+                            }
+                        });
+                        
+                        // Play this video - use promise to catch errors
+                        const playPromise = video.play();
+                        
+                        if (playPromise !== undefined) {
+                            playPromise.then(() => {
+                                console.log('Video playing successfully');
+                                this.style.opacity = '0';
+                            }).catch(error => {
+                                console.error('Error playing video:', error);
+                                // Try again with user interaction
+                                video.muted = true; // Mute to allow autoplay
+                                video.play().then(() => {
+                                    console.log('Video playing after muting');
+                                    this.style.opacity = '0';
+                                }).catch(err => {
+                                    console.error('Still cannot play video:', err);
+                                });
+                            });
+                        }
+                    } else {
+                        // Pause this video
+                        console.log('Pausing video');
+                        video.pause();
+                        this.style.opacity = '1';
+                    }
+                } catch (error) {
+                    console.error('Error handling video:', error);
                 }
-            });
+            }
         });
     });
-
-    // Trigger click on "all" category to initialize the gallery
-    document.querySelector('.gallery-category.active').click();
+    
+    // Reset overlay when video ends
+    document.querySelectorAll('video').forEach(video => {
+        video.addEventListener('ended', function() {
+            console.log('Video ended');
+            const overlay = this.parentElement.querySelector('.video-overlay');
+            if (overlay) {
+                overlay.style.opacity = '1';
+            }
+            this.currentTime = 0;
+        });
+        
+        // Handle video errors
+        video.addEventListener('error', function(e) {
+            console.error('Video error:', e);
+            // Show a fallback image if video fails to load
+            const poster = this.getAttribute('poster');
+            if (poster) {
+                this.style.display = 'none';
+                const img = document.createElement('img');
+                img.src = poster;
+                img.alt = 'Video thumbnail';
+                this.parentElement.insertBefore(img, this);
+            }
+        });
+    });
+    
+    // Add direct click handlers to play buttons as well
+    document.querySelectorAll('.play-button').forEach(button => {
+        button.addEventListener('click', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            
+            console.log('Play button clicked directly');
+            // Trigger the parent overlay's click event
+            this.closest('.video-overlay').click();
+        });
+    });
 });

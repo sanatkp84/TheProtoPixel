@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Short Videos & Reels - TheProtoPixel</title>
     <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/video-player.css">
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -62,7 +63,8 @@
             overflow: hidden;
         }
         
-        .portfolio-gallery-img img {
+        .portfolio-gallery-img img,
+        .portfolio-gallery-img video {
             position: absolute;
             top: 0;
             left: 0;
@@ -72,7 +74,8 @@
             transition: transform 0.5s ease;
         }
         
-        .portfolio-gallery-item:hover .portfolio-gallery-img img {
+        .portfolio-gallery-item:hover .portfolio-gallery-img img,
+        .portfolio-gallery-item:hover .portfolio-gallery-img video {
             transform: scale(1.1);
         }
         
@@ -128,12 +131,30 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            opacity: 0;
+            opacity: 1;
             transition: opacity 0.3s ease;
+            cursor: pointer;
+            z-index: 10;
         }
         
-        .portfolio-gallery-item:hover .video-overlay {
-            opacity: 1;
+        .portfolio-gallery-img video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: 1;
+        }
+        
+        /* Show controls when video is playing */
+        .video-playing video {
+            z-index: 20;
+        }
+        
+        .video-playing .video-overlay {
+            opacity: 0;
+            pointer-events: none;
         }
         
         .play-button {
@@ -154,6 +175,48 @@
             transform: scale(1.1);
         }
     </style>
+    <script>
+        // JavaScript to handle video play/pause functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const videoOverlays = document.querySelectorAll('.video-overlay');
+            
+            videoOverlays.forEach(overlay => {
+                overlay.addEventListener('click', function() {
+                    const videoContainer = this.closest('.portfolio-gallery-img');
+                    const video = videoContainer.querySelector('video');
+                    
+                    if (video) {
+                        if (video.paused) {
+                            // Pause all other videos first
+                            document.querySelectorAll('video').forEach(v => {
+                                if (v !== video) {
+                                    v.pause();
+                                }
+                            });
+                            
+                            // Play this video
+                            video.play();
+                            this.style.opacity = '0';
+                        } else {
+                            video.pause();
+                            this.style.opacity = '1';
+                        }
+                    }
+                });
+            });
+            
+            // Reset overlay when video ends
+            document.querySelectorAll('video').forEach(video => {
+                video.addEventListener('ended', function() {
+                    const overlay = this.parentElement.querySelector('.video-overlay');
+                    if (overlay) {
+                        overlay.style.opacity = '1';
+                    }
+                    this.currentTime = 0;
+                });
+            });
+        });
+    </script>
 </head>
 <body>
     <!-- Navigation -->
@@ -216,16 +279,16 @@
                 <!-- Item 1 -->
                 <div class="portfolio-gallery-item" data-tags="reels product promotion" data-aos="fade-up">
                     <div class="portfolio-gallery-img">
-                        <img src="https://images.unsplash.com/photo-1616763355548-1b606f439f86?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Product Promotion Reel">
-                        <div class="video-overlay">
+                        <video id="video1" src="../videos/client-VP-2-NEW GRAPHICS.mp4" preload="metadata" controls></video>
+                        <div class="video-overlay" onclick="playVideo('video1')">
                             <div class="play-button">
                                 <i class="fas fa-play"></i>
                             </div>
                         </div>
                     </div>
                     <div class="portfolio-gallery-info">
-                        <h3>Product Showcase</h3>
-                        <p>Engaging product reveal for Instagram</p>
+                        <h3>Graphy Promotional Video</h3>
+                        <p>Engaging Short Video for Instagram/YouTube</p>
                         <div class="portfolio-tags">
                             <span class="portfolio-tag">reels</span>
                             <span class="portfolio-tag">product</span>
@@ -237,8 +300,8 @@
                 <!-- Item 2 -->
                 <div class="portfolio-gallery-item" data-tags="tiktok lifestyle fashion" data-aos="fade-up" data-aos-delay="100">
                     <div class="portfolio-gallery-img">
-                        <img src="https://images.unsplash.com/photo-1551854838-212c50b4c184?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80" alt="Fashion TikTok">
-                        <div class="video-overlay">
+                        <video id="video2" src="../videos/EDITED-MEME-V1-GRAPHY.MOV" preload="metadata" poster="https://images.unsplash.com/photo-1551854838-212c50b4c184?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80" controls></video>
+                        <div class="video-overlay" onclick="playVideo('video2')">
                             <div class="play-button">
                                 <i class="fas fa-play"></i>
                             </div>
@@ -258,8 +321,8 @@
                 <!-- Item 3 -->
                 <div class="portfolio-gallery-item" data-tags="shorts tutorial tech" data-aos="fade-up" data-aos-delay="200">
                     <div class="portfolio-gallery-img">
-                        <img src="https://images.unsplash.com/photo-1611162616475-46b635cb6868?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1074&q=80" alt="Tech Tutorial Short">
-                        <div class="video-overlay">
+                        <video id="video3" src="../videos/video3.mp4" preload="metadata" poster="https://images.unsplash.com/photo-1611162616475-46b635cb6868?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1074&q=80" controls></video>
+                        <div class="video-overlay" onclick="playVideo('video3')">
                             <div class="play-button">
                                 <i class="fas fa-play"></i>
                             </div>
@@ -279,8 +342,8 @@
                 <!-- Item 4 -->
                 <div class="portfolio-gallery-item" data-tags="reels lifestyle travel" data-aos="fade-up" data-aos-delay="300">
                     <div class="portfolio-gallery-img">
-                        <img src="https://images.unsplash.com/photo-1527631746610-bca00a040d60?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80" alt="Travel Reel">
-                        <div class="video-overlay">
+                        <video id="video4" src="../videos/video4.mp4" preload="metadata" poster="https://images.unsplash.com/photo-1527631746610-bca00a040d60?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80" controls></video>
+                        <div class="video-overlay" onclick="playVideo('video4')">
                             <div class="play-button">
                                 <i class="fas fa-play"></i>
                             </div>
@@ -300,8 +363,8 @@
                 <!-- Item 5 -->
                 <div class="portfolio-gallery-item" data-tags="tiktok product unboxing" data-aos="fade-up" data-aos-delay="400">
                     <div class="portfolio-gallery-img">
-                        <img src="https://images.unsplash.com/photo-1600494603989-9650cf6ddd3d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80" alt="Product Unboxing">
-                        <div class="video-overlay">
+                        <video id="video5" src="../videos/video5.mp4" preload="metadata" poster="https://images.unsplash.com/photo-1600494603989-9650cf6ddd3d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80" controls></video>
+                        <div class="video-overlay" onclick="playVideo('video5')">
                             <div class="play-button">
                                 <i class="fas fa-play"></i>
                             </div>
@@ -321,8 +384,8 @@
                 <!-- Item 6 -->
                 <div class="portfolio-gallery-item" data-tags="shorts tutorial cooking" data-aos="fade-up" data-aos-delay="500">
                     <div class="portfolio-gallery-img">
-                        <img src="https://images.unsplash.com/photo-1556911220-e15b29be8c8f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80" alt="Cooking Tutorial">
-                        <div class="video-overlay">
+                        <video id="video6" src="../videos/video6.mp4" preload="metadata" poster="https://images.unsplash.com/photo-1556911220-e15b29be8c8f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80" controls></video>
+                        <div class="video-overlay" onclick="playVideo('video6')">
                             <div class="play-button">
                                 <i class="fas fa-play"></i>
                             </div>
@@ -400,5 +463,76 @@
     <!-- Scripts -->
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script src="../js/script.js"></script>
+    <script>
+        // Simple video player function
+        function playVideo(videoId) {
+            console.log('Playing video:', videoId);
+            
+            // Get the video element
+            const video = document.getElementById(videoId);
+            if (!video) {
+                console.error('Video element not found:', videoId);
+                return;
+            }
+            
+            // Get all videos and pause them
+            document.querySelectorAll('video').forEach(v => {
+                // Skip the current video
+                if (v.id !== videoId) {
+                    v.pause();
+                    
+                    // Reset all other video containers
+                    const container = v.closest('.portfolio-gallery-img');
+                    if (container) {
+                        container.classList.remove('video-playing');
+                    }
+                }
+            });
+            
+            // Get the container
+            const container = video.closest('.portfolio-gallery-img');
+            
+            // Play the video
+            try {
+                // Toggle play/pause
+                if (video.paused) {
+                    video.play()
+                        .then(() => {
+                            console.log('Video playing successfully');
+                            if (container) {
+                                container.classList.add('video-playing');
+                            }
+                        })
+                        .catch(error => {
+                            console.error('Error playing video:', error);
+                            alert('Could not play video. Please try again or check if your browser supports this video format.');
+                        });
+                } else {
+                    video.pause();
+                    if (container) {
+                        container.classList.remove('video-playing');
+                    }
+                }
+            } catch (error) {
+                console.error('Error handling video:', error);
+            }
+        }
+        
+        // Initialize when the page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('Page loaded, setting up video players');
+            
+            // Add ended event to all videos
+            document.querySelectorAll('video').forEach(video => {
+                video.addEventListener('ended', function() {
+                    console.log('Video ended:', this.id);
+                    const container = this.closest('.portfolio-gallery-img');
+                    if (container) {
+                        container.classList.remove('video-playing');
+                    }
+                });
+            });
+        });
+    </script>
 </body>
 </html>
