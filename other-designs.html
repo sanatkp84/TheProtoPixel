@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Other Designs - TheProtoPixel</title>
+    <link rel="stylesheet" href="css/style.css">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- AOS Animation Library -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <style>
+        /* Page Header Styles */
+        .page-header {
+            background: linear-gradient(rgba(44, 44, 84, 0.8), rgba(44, 44, 84, 0.8)), url('https://images.unsplash.com/photo-1558655146-d09347e92766?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1064&q=80');
+            background-size: cover;
+            background-position: center;
+            padding: 120px 0 80px;
+            text-align: center;
+            color: white;
+        }
+        
+        .page-header h1 {
+            margin-bottom: 15px;
+        }
+        
+        .page-header p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        /* Design Samples Section */
+        .design-samples {
+            padding: 100px 0;
+            background-color: #f5f7ff;
+        }
+
+        .ratio-info {
+            background-color: white;
+            border-radius: 10px;
+            padding: 30px;
+            margin-bottom: 50px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+        }
+
+        .ratio-info h3 {
+            margin-bottom: 15px;
+            color: var(--primary-color);
+        }
+
+        .ratio-info p {
+            margin-bottom: 20px;
+        }
+
+        .ratio-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+
+        .ratio-table th, .ratio-table td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid #eee;
+        }
+
+        .ratio-table th {
+            background-color: #f5f7ff;
+            font-weight: 600;
+        }
+
+        .ratio-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        /* Sample Gallery */
+        .sample-gallery-section {
+            margin-bottom: 80px;
+        }
+
+        .sample-gallery-header {
+            margin-bottom: 30px;
+        }
+
+        .sample-gallery-header h3 {
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+        }
+
+        .sample-gallery-header p {
+            color: var(--gray-color);
+        }
+
+        .sample-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .sample-item {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+        }
+
+        .sample-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(108, 99, 255, 0.1);
+        }
+
+        .sample-image {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .sample-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .sample-video {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .sample-video video {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .sample-details {
+            padding: 20px;
+        }
+
+        .sample-details h4 {
+            margin-bottom: 10px;
+        }
+
+        .sample-details p {
+            color: var(--gray-color);
+            margin-bottom: 15px;
+        }
+
+        .sample-ratio {
+            display: inline-block;
+            background-color: #f5f7ff;
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 0.9rem;
+            color: var(--primary-color);
+            font-weight: 500;
+        }
+
+        /* Preserve aspect ratio containers */
+        .ratio-container {
+            position: relative;
+            width: 100%;
+            overflow: hidden;
+        }
+
+        .ratio-16-9 {
+            padding-top: 56.25%; /* 16:9 Aspect Ratio */
+        }
+
+        .ratio-9-16 {
+            padding-top: 177.78%; /* 9:16 Aspect Ratio */
+        }
+
+        .ratio-1-1 {
+            padding-top: 100%; /* 1:1 Aspect Ratio */
+        }
+
+        .ratio-4-3 {
+            padding-top: 75%; /* 4:3 Aspect Ratio */
+        }
+
+        .ratio-3-4 {
+            padding-top: 133.33%; /* 3:4 Aspect Ratio */
+        }
+
+        .ratio-21-9 {
+            padding-top: 42.86%; /* 21:9 Aspect Ratio */
+        }
+
+        .ratio-container img,
+        .ratio-container video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* Upload Section */
+        .upload-section {
+            background-color: white;
+            padding: 80px 0;
+            text-align: center;
+        }
+
+        /* Contact Button Section */
+        .contact-button-section {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            padding: 80px 0;
+            text-align: center;
+            color: white;
+        }
+
+        .contact-button-container {
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .contact-button-container h3 {
+            font-size: 2rem;
+            margin-bottom: 15px;
+        }
+
+        .contact-button-container p {
+            margin-bottom: 30px;
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        .contact-button-container .btn {
+            padding: 15px 30px;
+            font-size: 1.1rem;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .contact-button-container .btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        @media (max-width: 768px) {
+            .sample-gallery {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="logo">
+                <a href="index.html">
+                    <img src="images/my logo.png" alt="TheProtoPixel Logo" class="site-logo">
+                    <span class="logo-text"><span class="highlight">TheProto</span>Pixel</span>
+                </a>
+            </div>
+            <div class="nav-toggle" id="navToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="index.html#home" class="nav-link">Home</a></li>
+                <li><a href="index.html#services" class="nav-link">Services</a></li>
+                <li><a href="index.html#portfolio" class="nav-link">Portfolio</a></li>
+                <li><a href="index.html#clients" class="nav-link">Clients</a></li>
+                <li><a href="index.html#testimonials" class="nav-link">Testimonials</a></li>
+                <li><a href="index.html#pricing" class="nav-link">Pricing</a></li>
+                <li><a href="index.html#contact" class="nav-link">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <h1 data-aos="fade-up">Other Designs</h1>
+            <p data-aos="fade-up" data-aos-delay="100">Explore our diverse design capabilities and custom solutions</p>
+        </div>
+    </section>
+
+    <!-- Design Samples Section -->
+    <section class="design-samples">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <h2>Design Samples</h2>
+                <p>Examples of different design formats and aspect ratios</p>
+            </div>
+
+            <div class="ratio-info" data-aos="fade-up">
+                <h3>Understanding Aspect Ratios</h3>
+                <p>Different platforms and design types require specific aspect ratios. Our system preserves your original image and video ratios to ensure optimal display across all devices and platforms.</p>
+                
+                <table class="ratio-table">
+                    <thead>
+                        <tr>
+                            <th>Design Type</th>
+                            <th>Common Aspect Ratios</th>
+                            <th>Typical Use</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>YouTube Thumbnails</td>
+                            <td>16:9</td>
+                            <td>YouTube video thumbnails</td>
+                        </tr>
+                        <tr>
+                            <td>Instagram Posts</td>
+                            <td>1:1 (Square)</td>
+                            <td>Standard Instagram feed posts</td>
+                        </tr>
+                        <tr>
+                            <td>Instagram Stories/Reels</td>
+                            <td>9:16</td>
+                            <td>Vertical content for mobile viewing</td>
+                        </tr>
+                        <tr>
+                            <td>Facebook Cover</td>
+                            <td>16:9 or 2.7:1</td>
+                            <td>Facebook page header images</td>
+                        </tr>
+                        <tr>
+                            <td>Twitter Header</td>
+                            <td>3:1</td>
+                            <td>Twitter profile header images</td>
+                        </tr>
+                        <tr>
+                            <td>LinkedIn Banner</td>
+                            <td>4:1</td>
+                            <td>LinkedIn profile and company page headers</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Image Samples -->
+            <div class="sample-gallery-section" data-aos="fade-up">
+                <div class="sample-gallery-header">
+                    <h3>Image Samples</h3>
+                    <p>Examples of different image aspect ratios that maintain their original dimensions</p>
+                </div>
+                
+                <div class="sample-gallery">
+                    <!-- 16:9 Sample -->
+                    <div class="sample-item">
+                        <div class="sample-image">
+                            <div class="ratio-container ratio-16-9">
+                                <img src="https://images.unsplash.com/photo-1611162616475-46b635cb6868?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1074&q=80" alt="16:9 Ratio Image">
+                            </div>
+                        </div>
+                        <div class="sample-details">
+                            <h4>YouTube Thumbnail</h4>
+                            <p>Perfect for video thumbnails and landscape designs</p>
+                            <span class="sample-ratio">16:9 Ratio</span>
+                        </div>
+                    </div>
+                    
+                    <!-- 1:1 Sample -->
+                    <div class="sample-item">
+                        <div class="sample-image">
+                            <div class="ratio-container ratio-1-1">
+                                <img src="https://images.unsplash.com/photo-1611162616305-c69b3267567c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1074&q=80" alt="1:1 Ratio Image">
+                            </div>
+                        </div>
+                        <div class="sample-details">
+                            <h4>Instagram Post</h4>
+                            <p>Square format ideal for Instagram feed posts</p>
+                            <span class="sample-ratio">1:1 Ratio</span>
+                        </div>
+                    </div>
+                    
+                    <!-- 9:16 Sample -->
+                    <div class="sample-item">
+                        <div class="sample-image">
+                            <div class="ratio-container ratio-9-16">
+                                <img src="https://images.unsplash.com/photo-1611162618071-b39a2ec055fb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1074&q=80" alt="9:16 Ratio Image">
+                            </div>
+                        </div>
+                        <div class="sample-details">
+                            <h4>Instagram Story/Reel</h4>
+                            <p>Vertical format for stories and short-form content</p>
+                            <span class="sample-ratio">9:16 Ratio</span>
+                        </div>
+                    </div>
+                    
+                    <!-- 4:3 Sample -->
+                    <div class="sample-item">
+                        <div class="sample-image">
+                            <div class="ratio-container ratio-4-3">
+                                <img src="https://images.unsplash.com/photo-1557804506-669a67965ba0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1074&q=80" alt="4:3 Ratio Image">
+                            </div>
+                        </div>
+                        <div class="sample-details">
+                            <h4>Presentation Slide</h4>
+                            <p>Standard format for presentations and documents</p>
+                            <span class="sample-ratio">4:3 Ratio</span>
+                        </div>
+                    </div>
+                    
+                    <!-- 21:9 Sample -->
+                    <div class="sample-item">
+                        <div class="sample-image">
+                            <div class="ratio-container ratio-21-9">
+                                <img src="https://images.unsplash.com/photo-1493246507139-91e8fad9978e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="21:9 Ratio Image">
+                            </div>
+                        </div>
+                        <div class="sample-details">
+                            <h4>Website Banner</h4>
+                            <p>Ultra-wide format for website headers and banners</p>
+                            <span class="sample-ratio">21:9 Ratio</span>
+                        </div>
+                    </div>
+                    
+                    <!-- 3:4 Sample -->
+                    <div class="sample-item">
+                        <div class="sample-image">
+                            <div class="ratio-container ratio-3-4">
+                                <img src="https://images.unsplash.com/photo-1572044162444-ad60f128bdea?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="3:4 Ratio Image">
+                            </div>
+                        </div>
+                        <div class="sample-details">
+                            <h4>Portrait Design</h4>
+                            <p>Classic portrait format for print materials</p>
+                            <span class="sample-ratio">3:4 Ratio</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Video Samples -->
+            <div class="sample-gallery-section" data-aos="fade-up">
+                <div class="sample-gallery-header">
+                    <h3>Video Samples</h3>
+                    <p>Examples of different video aspect ratios that maintain their original dimensions</p>
+                </div>
+                
+                <div class="sample-gallery">
+                    <!-- 16:9 Video Sample -->
+                    <div class="sample-item">
+                        <div class="sample-video">
+                            <div class="ratio-container ratio-16-9">
+                                <video controls poster="https://images.unsplash.com/photo-1611162616475-46b635cb6868?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1074&q=80">
+                                    <source src="https://assets.mixkit.co/videos/preview/mixkit-waves-in-the-water-1164-large.mp4" type="video/mp4">
+                                    Your browser does not support the video tag.
+                                </video>
+                            </div>
+                        </div>
+                        <div class="sample-details">
+                            <h4>YouTube Video</h4>
+                            <p>Standard landscape format for YouTube videos</p>
+                            <span class="sample-ratio">16:9 Ratio</span>
+                        </div>
+                    </div>
+                    
+                    <!-- 9:16 Video Sample -->
+                    <div class="sample-item">
+                        <div class="sample-video">
+                            <div class="ratio-container ratio-9-16">
+                                <video controls poster="https://images.unsplash.com/photo-1611162618071-b39a2ec055fb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1074&q=80">
+                                    <source src="https://assets.mixkit.co/videos/preview/mixkit-tree-with-yellow-flowers-1173-large.mp4" type="video/mp4">
+                                    Your browser does not support the video tag.
+                                </video>
+                            </div>
+                        </div>
+                        <div class="sample-details">
+                            <h4>Instagram Reel</h4>
+                            <p>Vertical video format for mobile-first platforms</p>
+                            <span class="sample-ratio">9:16 Ratio</span>
+                        </div>
+                    </div>
+                    
+                    <!-- 1:1 Video Sample -->
+                    <div class="sample-item">
+                        <div class="sample-video">
+                            <div class="ratio-container ratio-1-1">
+                                <video controls poster="https://images.unsplash.com/photo-1611162616305-c69b3267567c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1074&q=80">
+                                    <source src="https://assets.mixkit.co/videos/preview/mixkit-spinning-around-the-earth-29351-large.mp4" type="video/mp4">
+                                    Your browser does not support the video tag.
+                                </video>
+                            </div>
+                        </div>
+                        <div class="sample-details">
+                            <h4>Square Video</h4>
+                            <p>Perfect for Instagram feed videos and ads</p>
+                            <span class="sample-ratio">1:1 Ratio</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Contact Button Section -->
+    <section class="contact-button-section">
+        <div class="container">
+            <div class="contact-button-container" data-aos="fade-up">
+                <h3>Need Custom Designs?</h3>
+                <p>We can create bespoke designs tailored to your specific requirements and aspect ratios.</p>
+                <a href="index.html#contact" class="btn btn-primary">Contact Us for Custom Designs</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <a href="index.html">
+                        <img src="images/my logo.png" alt="TheProtoPixel Logo" class="footer-site-logo">
+                        <span class="footer-logo-text"><span class="highlight">TheProto</span>Pixel</span>
+                    </a>
+                    <p>Designs That Speak, <br> Creativity That Converts.</p>
+                </div>
+                <div class="footer-links">
+                    <div class="footer-column">
+                        <h4>Quick Links</h4>
+                        <ul>
+                            <li><a href="index.html#home">Home</a></li>
+                            <li><a href="index.html#services">Services</a></li>
+                            <li><a href="index.html#portfolio">Portfolio</a></li>
+                            <li><a href="index.html#clients">Clients</a></li>
+                            <li><a href="index.html#pricing">Pricing</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-column">
+                        <h4>Services</h4>
+                        <ul>
+                            <li><a href="portfolio/thumbnails.html">Thumbnail Design</a></li>
+                            <li><a href="portfolio/shorts.html">Reels & Shorts</a></li>
+                            <li><a href="portfolio/social-media.html">Social Media</a></li>
+                            <li><a href="other-designs.html">Custom Designs</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-column">
+                        <h4>Connect</h4>
+                        <ul>
+                            <li><a href="#"><i class="fab fa-instagram"></i> Instagram</a></li>
+                            <li><a href="#"><i class="fab fa-behance"></i> Behance</a></li>
+                            <li><a href="#"><i class="fab fa-dribbble"></i> Dribbble</a></li>
+                            <li><a href="#"><i class="fab fa-linkedin"></i> LinkedIn</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 TheProtoPixel. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <a href="#" class="back-to-top">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+
+    <!-- Scripts -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="js/script.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize AOS
+            AOS.init();
+        });
+    </script>
+</body>
+</html>

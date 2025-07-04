@@ -1,0 +1,78 @@
+/**
+ * Custom Video Player Styles
+ */
+
+/* Hide video controls by default */
+.portfolio-gallery-img video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 1;
+}
+
+.portfolio-gallery-img video::-webkit-media-controls {
+    display: none !important;
+}
+
+/* Show controls when video is playing */
+.video-playing video {
+    z-index: 20;
+}
+
+.video-playing video::-webkit-media-controls {
+    display: flex !important;
+}
+
+/* Hide overlay when video is playing */
+.video-playing .video-overlay {
+    opacity: 0 !important;
+    pointer-events: none;
+}
+
+/* Make sure the video container maintains aspect ratio */
+.portfolio-gallery-img {
+    position: relative;
+    padding-top: 177.78%; /* 9:16 Aspect Ratio for vertical videos */
+    overflow: hidden;
+    background-color: #000;
+}
+
+/* Style the play button */
+.play-button {
+    width: 60px;
+    height: 60px;
+    background-color: var(--primary-color);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 1.5rem;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s ease;
+}
+
+.play-button:hover {
+    transform: scale(1.1);
+    background-color: var(--secondary-color);
+}
+
+/* Video overlay */
+.video-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 1;
+    transition: opacity 0.3s ease;
+    cursor: pointer;
+    z-index: 10;
+}

@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Short Videos & Reels - TheProtoPixel</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/video-player.css">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- AOS Animation Library -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <style>
+        /* Additional styles specific to portfolio pages */
+        .portfolio-header {
+            background-color: var(--dark-color);
+            padding: 120px 0 60px;
+            color: white;
+            text-align: center;
+        }
+        
+        .portfolio-header h1 {
+            margin-bottom: 10px;
+        }
+        
+        .portfolio-header p {
+            color: rgba(255, 255, 255, 0.8);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .portfolio-gallery {
+            padding: 60px 0;
+        }
+        
+        .portfolio-gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+        
+        .portfolio-gallery-item {
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            opacity: 1;
+        }
+        
+        .portfolio-gallery-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(108, 99, 255, 0.2);
+        }
+        
+        .portfolio-gallery-img {
+            position: relative;
+            padding-top: 177.78%; /* 9:16 Aspect Ratio */
+            overflow: hidden;
+        }
+        
+        .portfolio-gallery-img img,
+        .portfolio-gallery-img video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .portfolio-gallery-item:hover .portfolio-gallery-img img,
+        .portfolio-gallery-item:hover .portfolio-gallery-img video {
+            transform: scale(1.1);
+        }
+        
+        .portfolio-gallery-info {
+            padding: 20px;
+            background-color: white;
+        }
+        
+        .portfolio-gallery-info h3 {
+            margin-bottom: 5px;
+            font-size: 1.2rem;
+        }
+        
+        .portfolio-gallery-info p {
+            color: var(--gray-color);
+            margin-bottom: 10px;
+            font-size: 0.9rem;
+        }
+        
+        .portfolio-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 5px;
+        }
+        
+        .portfolio-tag {
+            background-color: #f0f0f0;
+            color: var(--gray-color);
+            padding: 3px 10px;
+            border-radius: 50px;
+            font-size: 0.8rem;
+        }
+        
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            color: white;
+            margin-bottom: 20px;
+        }
+        
+        .back-link i {
+            margin-right: 5px;
+        }
+        
+        /* Video play button overlay */
+        .video-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 1;
+            transition: opacity 0.3s ease;
+            cursor: pointer;
+            z-index: 10;
+        }
+        
+        .portfolio-gallery-img video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: 1;
+        }
+        
+        /* Show controls when video is playing */
+        .video-playing video {
+            z-index: 20;
+        }
+        
+        .video-playing .video-overlay {
+            opacity: 0;
+            pointer-events: none;
+        }
+        
+        .play-button {
+            width: 60px;
+            height: 60px;
+            background-color: var(--primary-color);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease;
+        }
+        
+        .portfolio-gallery-item:hover .play-button {
+            transform: scale(1.1);
+        }
+    </style>
+    <script>
+        // JavaScript to handle video play/pause functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const videoOverlays = document.querySelectorAll('.video-overlay');
+            
+            videoOverlays.forEach(overlay => {
+                overlay.addEventListener('click', function() {
+                    const videoContainer = this.closest('.portfolio-gallery-img');
+                    const video = videoContainer.querySelector('video');
+                    
+                    if (video) {
+                        if (video.paused) {
+                            // Pause all other videos first
+                            document.querySelectorAll('video').forEach(v => {
+                                if (v !== video) {
+                                    v.pause();
+                                }
+                            });
+                            
+                            // Play this video
+                            video.play();
+                            this.style.opacity = '0';
+                        } else {
+                            video.pause();
+                            this.style.opacity = '1';
+                        }
+                    }
+                });
+            });
+            
+            // Reset overlay when video ends
+            document.querySelectorAll('video').forEach(video => {
+                video.addEventListener('ended', function() {
+                    const overlay = this.parentElement.querySelector('.video-overlay');
+                    if (overlay) {
+                        overlay.style.opacity = '1';
+                    }
+                    this.currentTime = 0;
+                });
+            });
+        });
+    </script>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar scrolled">
+        <div class="container">
+            <div class="logo">
+                <a href="../index.html">
+                    <img src="../images/my logo.png" alt="TheProtoPixel Logo" class="site-logo">
+                    <span class="logo-text"><span class="highlight">TheProto</span>Pixel</span>
+                </a>
+            </div>
+            <div class="nav-toggle" id="navToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="../index.html#home" class="nav-link">Home</a></li>
+                <li><a href="../index.html#services" class="nav-link">Services</a></li>
+                <li><a href="../index.html#portfolio" class="nav-link">Portfolio</a></li>
+                <li><a href="../index.html#clients" class="nav-link">Clients</a></li>
+                <li><a href="../index.html#testimonials" class="nav-link">Testimonials</a></li>
+                <li><a href="../index.html#pricing" class="nav-link">Pricing</a></li>
+                <li><a href="../index.html#contact" class="nav-link">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Portfolio Header -->
+    <header class="portfolio-header">
+        <div class="container">
+            <a href="../index.html#portfolio" class="back-link">
+                <i class="fas fa-arrow-left"></i> Back to Portfolio
+            </a>
+            <h1>Short Videos & Reels</h1>
+            <p>Captivating short-form video content that stops the scroll</p>
+        </div>
+    </header>
+
+    <!-- Portfolio Gallery -->
+    <section class="portfolio-gallery">
+        <div class="container">
+            <!-- Search and Filter -->
+            <div class="portfolio-search">
+                <input type="text" placeholder="Search by title or tag...">
+                <button><i class="fas fa-search"></i></button>
+            </div>
+            
+            <div class="portfolio-filter">
+                <button class="filter-btn active" data-filter="all">All</button>
+                <button class="filter-btn" data-filter="reels">Reels</button>
+                <button class="filter-btn" data-filter="tiktok">TikTok</button>
+                <button class="filter-btn" data-filter="shorts">YouTube Shorts</button>
+                <button class="filter-btn" data-filter="product">Product</button>
+                <button class="filter-btn" data-filter="lifestyle">Lifestyle</button>
+            </div>
+            
+            <!-- Portfolio Items -->
+            <div class="portfolio-gallery-grid">
+                <!-- Item 1 -->
+                <div class="portfolio-gallery-item" data-tags="reels product promotion" data-aos="fade-up">
+                    <div class="portfolio-gallery-img">
+                        <video id="video1" src="../videos/client-VP-2-NEW GRAPHICS.mp4" preload="metadata" controls></video>
+                        <div class="video-overlay" onclick="playVideo('video1')">
+                            <div class="play-button">
+                                <i class="fas fa-play"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="portfolio-gallery-info">
+                        <h3>Graphy Promotional Video</h3>
+                        <p>Engaging Short Video for Instagram/YouTube</p>
+                        <div class="portfolio-tags">
+                            <span class="portfolio-tag">reels</span>
+                            <span class="portfolio-tag">product</span>
+                            <span class="portfolio-tag">promotion</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Item 2 -->
+                <div class="portfolio-gallery-item" data-tags="tiktok lifestyle fashion" data-aos="fade-up" data-aos-delay="100">
+                    <div class="portfolio-gallery-img">
+                        <video id="video2" src="../videos/EDITED-MEME-V1-GRAPHY.MOV" preload="metadata" controls></video>
+                        <div class="video-overlay" onclick="playVideo('video2')">
+                            <div class="play-button">
+                                <i class="fas fa-play"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="portfolio-gallery-info">
+                        <h3>Fashion Transition</h3>
+                        <p>Trendy outfit transition for TikTok</p>
+                        <div class="portfolio-tags">
+                            <span class="portfolio-tag">tiktok</span>
+                            <span class="portfolio-tag">lifestyle</span>
+                            <span class="portfolio-tag">fashion</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Item 3 -->
+                <div class="portfolio-gallery-item" data-tags="shorts tutorial tech" data-aos="fade-up" data-aos-delay="200">
+                    <div class="portfolio-gallery-img">
+                        <video id="video3" src="../videos/video3.mp4" preload="metadata" poster="https://images.unsplash.com/photo-1611162616475-46b635cb6868?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1074&q=80" controls></video>
+                        <div class="video-overlay" onclick="playVideo('video3')">
+                            <div class="play-button">
+                                <i class="fas fa-play"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="portfolio-gallery-info">
+                        <h3>Quick Tech Tip</h3>
+                        <p>Informative tech tutorial for YouTube Shorts</p>
+                        <div class="portfolio-tags">
+                            <span class="portfolio-tag">shorts</span>
+                            <span class="portfolio-tag">tutorial</span>
+                            <span class="portfolio-tag">tech</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Item 4 -->
+                <div class="portfolio-gallery-item" data-tags="reels lifestyle travel" data-aos="fade-up" data-aos-delay="300">
+                    <div class="portfolio-gallery-img">
+                        <video id="video4" src="../videos/video4.mp4" preload="metadata" poster="https://images.unsplash.com/photo-1527631746610-bca00a040d60?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80" controls></video>
+                        <div class="video-overlay" onclick="playVideo('video4')">
+                            <div class="play-button">
+                                <i class="fas fa-play"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="portfolio-gallery-info">
+                        <h3>Travel Moments</h3>
+                        <p>Cinematic travel highlights for Instagram</p>
+                        <div class="portfolio-tags">
+                            <span class="portfolio-tag">reels</span>
+                            <span class="portfolio-tag">lifestyle</span>
+                            <span class="portfolio-tag">travel</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Item 5 -->
+                <div class="portfolio-gallery-item" data-tags="tiktok product unboxing" data-aos="fade-up" data-aos-delay="400">
+                    <div class="portfolio-gallery-img">
+                        <video id="video5" src="../videos/video5.mp4" preload="metadata" poster="https://images.unsplash.com/photo-1600494603989-9650cf6ddd3d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80" controls></video>
+                        <div class="video-overlay" onclick="playVideo('video5')">
+                            <div class="play-button">
+                                <i class="fas fa-play"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="portfolio-gallery-info">
+                        <h3>Product Unboxing</h3>
+                        <p>Satisfying unboxing experience for TikTok</p>
+                        <div class="portfolio-tags">
+                            <span class="portfolio-tag">tiktok</span>
+                            <span class="portfolio-tag">product</span>
+                            <span class="portfolio-tag">unboxing</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Item 6 -->
+                <div class="portfolio-gallery-item" data-tags="shorts tutorial cooking" data-aos="fade-up" data-aos-delay="500">
+                    <div class="portfolio-gallery-img">
+                        <video id="video6" src="../videos/video6.mp4" preload="metadata" poster="https://images.unsplash.com/photo-1556911220-e15b29be8c8f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80" controls></video>
+                        <div class="video-overlay" onclick="playVideo('video6')">
+                            <div class="play-button">
+                                <i class="fas fa-play"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="portfolio-gallery-info">
+                        <h3>Quick Recipe</h3>
+                        <p>Fast-paced cooking tutorial for YouTube Shorts</p>
+                        <div class="portfolio-tags">
+                            <span class="portfolio-tag">shorts</span>
+                            <span class="portfolio-tag">tutorial</span>
+                            <span class="portfolio-tag">cooking</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <a href="../index.html">
+                        <img src="../images/my logo.png" alt="TheProtoPixel Logo" class="footer-site-logo">
+                        <span class="footer-logo-text"><span class="highlight">TheProto</span>Pixel</span>
+                    </a>
+                    <p>Designs That Speak. Creativity That Converts.</p>
+                </div>
+                <div class="footer-links">
+                    <div class="footer-column">
+                        <h4>Quick Links</h4>
+                        <ul>
+                            <li><a href="../index.html#home">Home</a></li>
+                            <li><a href="../index.html#services">Services</a></li>
+                            <li><a href="../index.html#portfolio">Portfolio</a></li>
+                            <li><a href="../index.html#clients">Clients</a></li>
+                            <li><a href="../index.html#pricing">Pricing</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-column">
+                        <h4>Portfolio</h4>
+                        <ul>
+                            <li><a href="thumbnails.html">Thumbnails</a></li>
+                            <li><a href="shorts.html">Short Videos</a></li>
+                            <li><a href="social-media.html">Social Media</a></li>
+                            <li><a href="events.html">Event Creatives</a></li>
+                            <li><a href="posters.html">Posters</a></li>
+                            <li><a href="invitations.html">Invitations</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-column">
+                        <h4>Connect</h4>
+                        <ul>
+                            <li><a href="#"><i class="fab fa-instagram"></i> Instagram</a></li>
+                            <li><a href="#"><i class="fab fa-behance"></i> Behance</a></li>
+                            <li><a href="#"><i class="fab fa-dribbble"></i> Dribbble</a></li>
+                            <li><a href="#"><i class="fab fa-linkedin"></i> LinkedIn</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 TheProtoPixel. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <a href="#" class="back-to-top active">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+
+    <!-- Scripts -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="../js/script.js"></script>
+    <script>
+        // Simple video player function
+        function playVideo(videoId) {
+            console.log('Playing video:', videoId);
+            
+            // Get the video element
+            const video = document.getElementById(videoId);
+            if (!video) {
+                console.error('Video element not found:', videoId);
+                return;
+            }
+            
+            // Get all videos and pause them
+            document.querySelectorAll('video').forEach(v => {
+                // Skip the current video
+                if (v.id !== videoId) {
+                    v.pause();
+                    
+                    // Reset all other video containers
+                    const container = v.closest('.portfolio-gallery-img');
+                    if (container) {
+                        container.classList.remove('video-playing');
+                    }
+                }
+            });
+            
+            // Get the container
+            const container = video.closest('.portfolio-gallery-img');
+            
+            // Play the video
+            try {
+                // Toggle play/pause
+                if (video.paused) {
+                    video.play()
+                        .then(() => {
+                            console.log('Video playing successfully');
+                            if (container) {
+                                container.classList.add('video-playing');
+                            }
+                        })
+                        .catch(error => {
+                            console.error('Error playing video:', error);
+                            alert('Could not play video. Please try again or check if your browser supports this video format.');
+                        });
+                } else {
+                    video.pause();
+                    if (container) {
+                        container.classList.remove('video-playing');
+                    }
+                }
+            } catch (error) {
+                console.error('Error handling video:', error);
+            }
+        }
+        
+        // Initialize when the page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('Page loaded, setting up video players');
+            
+            // Add ended event to all videos
+            document.querySelectorAll('video').forEach(video => {
+                video.addEventListener('ended', function() {
+                    console.log('Video ended:', this.id);
+                    const container = this.closest('.portfolio-gallery-img');
+                    if (container) {
+                        container.classList.remove('video-playing');
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

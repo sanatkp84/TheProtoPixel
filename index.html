@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TheProtoPixel - Creative Design Agency</title>
+    <link rel="stylesheet" href="css/style.css">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- AOS Animation Library -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <style>
+        /* Other Designs Button */
+        .other-designs-button {
+            text-align: center;
+            margin-top: 40px;
+        }
+        
+        .other-designs-button .btn {
+            padding: 15px 30px;
+            font-size: 1.1rem;
+            box-shadow: 0 10px 20px rgba(108, 99, 255, 0.2);
+            transition: all 0.3s ease;
+        }
+        
+        .other-designs-button .btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(108, 99, 255, 0.3);
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="logo">
+                <a href="#">
+                    <img src="images/my logo.png" alt="TheProtoPixel Logo" class="site-logo" style="background: transparent;">
+                    <span class="logo-text"><span class="highlight">TheProto</span>Pixel</span>
+                </a>
+            </div>
+            <div class="nav-toggle" id="navToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="#home" class="nav-link">Home</a></li>
+                <li><a href="#services" class="nav-link">Services</a></li>
+                <li><a href="#portfolio" class="nav-link">Portfolio</a></li>
+                <li><a href="#clients" class="nav-link">Clients</a></li>
+                <li><a href="#testimonials" class="nav-link">Testimonials</a></li>
+                <li><a href="#pricing" class="nav-link">Pricing</a></li>
+                <li><a href="#contact" class="nav-link">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="particles-container" id="particles-js"></div>
+        <div class="container">
+            <div class="hero-content" data-aos="fade-up">
+                <div class="logo-animation">
+                    <img src="images/my logo.png" alt="TheProtoPixel Logo" class="hero-logo" style="background: transparent;">
+                </div>
+                <h1>Designs That Speak. Creativity That Converts.</h1>
+                <p>We craft thumbnails, reels, and social media magic for creators & brands.</p>
+                <div class="cta-buttons">
+                    <a href="#contact" class="btn btn-primary">Get in Touch</a>
+                    <a href="#portfolio" class="btn btn-secondary">View Portfolio</a>
+                </div>
+            </div>
+        </div>
+        <div class="scroll-down">
+            <a href="#services">
+                <span class="mouse">
+                    <span class="wheel"></span>
+                </span>
+            </a>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="services">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <h2>Our Services</h2>
+                <p>Creative solutions tailored to your needs</p>
+            </div>
+            <div class="services-grid">
+                <div class="service-card" data-aos="fade-up" data-aos-delay="100">
+                    <div class="service-icon">
+                        <i class="fas fa-image"></i>
+                    </div>
+                    <h3>Thumbnail Design</h3>
+                    <p>Eye-catching thumbnails that drive clicks and engagement</p>
+                </div>
+                <div class="service-card" data-aos="fade-up" data-aos-delay="200">
+                    <div class="service-icon">
+                        <i class="fas fa-video"></i>
+                    </div>
+                    <h3>Reels & Shorts Editing</h3>
+                    <p>Captivating short-form video content that stops the scroll</p>
+                </div>
+                <div class="service-card" data-aos="fade-up" data-aos-delay="300">
+                    <div class="service-icon">
+                        <i class="fas fa-images"></i>
+                    </div>
+                    <h3>Carousel Creatives</h3>
+                    <p>Swipeable stories that educate and convert your audience</p>
+                </div>
+                <div class="service-card" data-aos="fade-up" data-aos-delay="400">
+                    <div class="service-icon">
+                        <i class="fas fa-paint-brush"></i>
+                    </div>
+                    <h3>Branding</h3>
+                    <p>Cohesive visual identity that makes your brand memorable</p>
+                </div>
+                <div class="service-card" data-aos="fade-up" data-aos-delay="500">
+                    <div class="service-icon">
+                        <i class="fas fa-object-group"></i>
+                    </div>
+                    <h3>Custom Designs</h3>
+                    <p>Tailored design solutions for your specific requirements</p>
+                </div>
+                <div class="service-card" data-aos="fade-up" data-aos-delay="600">
+                    <div class="service-icon">
+                        <i class="fas fa-calendar-check"></i>
+                    </div>
+                    <h3>Retainer Plans</h3>
+                    <p>Ongoing creative support for consistent brand presence</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Portfolio Section -->
+    <section id="portfolio" class="portfolio">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <h2>Our Portfolio</h2>
+                <p>Some of our best work</p>
+            </div>
+            
+            <div class="portfolio-grid">
+                <!-- 1. Thumbnails (16:9 ratio) -->
+                <div class="portfolio-item" data-aos="zoom-in" data-aos-delay="100">
+                    <div class="portfolio-img ratio-9-16">
+                        <img src="images/thumbnails.jpg" alt="Thumbnail Design">
+                    </div>
+                    <div class="portfolio-info">
+                        <h3>Thumbnails</h3>
+                        <p>YouTube & Video Thumbnails</p>
+                        <a href="portfolio/thumbnails.html" class="btn btn-outline">View Project</a>
+                    </div>
+                </div>
+                
+                <!-- 2. Short Videos & Reels (9:16 ratio) -->
+                <div class="portfolio-item" data-aos="zoom-in" data-aos-delay="200">
+                    <div class="portfolio-img ratio-9-16">
+                        <img src="images/shortsimage.jpg" alt="Short Video Edit">
+                    </div>
+                    <div class="portfolio-info">
+                        <h3>Short Videos & Reels</h3>
+                        <p>Reels, TikTok & YouTube Shorts</p>
+                        <a href="portfolio/shorts.html" class="btn btn-outline">View Project</a>
+                    </div>
+                </div>
+                
+                <!-- 3. Social Media Creatives (1:1 ratio) -->
+                <div class="portfolio-item" data-aos="zoom-in" data-aos-delay="300">
+                    <div class="portfolio-img ratio-9-16">
+                        <img src="images/posters.jpg" alt="Social Media Creative">
+                    </div>
+                    <div class="portfolio-info">
+                        <h3>Social Media Creatives</h3>
+                        <p>Instagram, Facebook & LinkedIn</p>
+                        <a href="portfolio/social-media.html" class="btn btn-outline">View Project</a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Other Designs Button -->
+            <div class="other-designs-button" data-aos="fade-up">
+                <a href="other-designs.html" class="btn btn-primary">Explore Other Designs</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Clients Section -->
+    <section id="clients" class="clients">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <h2>Our Clients</h2>
+                <p>Trusted by brands and creators</p>
+            </div>
+            <div class="clients-grid" data-aos="fade-up">
+                <!-- Client logos will be dynamically loaded from the /clients/ folder -->
+                <div class="client-logo">
+                    <img src="clients/tws logo.png" alt="Client Logo">
+                </div>
+                <div class="client-logo">
+                    <img src="clients/Logo_Black.png" alt="Client Logo">
+                </div>
+                <div class="client-logo">
+                    <img src="clients/final we logo.png" alt="Client Logo">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section id="testimonials" class="testimonials">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <h2>What Our Clients Say</h2>
+                <p>Don't just take our word for it</p>
+            </div>
+            <div class="testimonial-slider">
+                <div class="testimonial-track">
+                    <div class="testimonial-card" data-aos="fade-right">
+                        <div class="testimonial-content">
+                            <p>"TheProtoPixel transformed our social media presence. Their designs consistently outperform our previous content by 300% in engagement!"</p>
+                        </div>
+                        <div class="testimonial-author">
+                            <img src="https://randomuser.me/api/portraits/women/65.jpg" alt="Client">
+                            <div class="author-info">
+                                <h4>Emma Rodriguez</h4>
+                                <p>Marketing Director, Bloom Co.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="testimonial-card" data-aos="fade-left">
+                        <div class="testimonial-content">
+                            <p>"As a content creator, my thumbnails were holding me back. Since working with TheProtoPixel, my CTR has doubled and my channel is growing faster than ever!"</p>
+                        </div>
+                        <div class="testimonial-author">
+                            <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Client">
+                            <div class="author-info">
+                                <h4>Alex Chen</h4>
+                                <p>YouTube Creator, 500K+ Subscribers</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="testimonial-card" data-aos="fade-right">
+                        <div class="testimonial-content">
+                            <p>"The wedding invitations they designed for us received so many compliments! They perfectly captured our style and made the process stress-free."</p>
+                        </div>
+                        <div class="testimonial-author">
+                            <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Client">
+                            <div class="author-info">
+                                <h4>Priya Sharma</h4>
+                                <p>Happy Client</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-dots">
+                    <span class="dot active"></span>
+                    <span class="dot"></span>
+                    <span class="dot"></span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section id="pricing" class="pricing">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <h2>Our Pricing</h2>
+                <p>Transparent pricing for quality work</p>
+            </div>
+            
+            <div class="pricing-tabs">
+                <div class="tab-buttons">
+                    <button class="tab-btn active" data-tab="monthly">Monthly Plans</button>
+                    <button class="tab-btn" data-tab="individual">Individual Services</button>
+                </div>
+                
+                <div class="tab-content">
+                    <!-- Monthly Plans -->
+                    <div class="tab-pane active" id="monthly">
+                        <div class="pricing-grid">
+                            <div class="pricing-card" data-aos="fade-up" data-aos-delay="100">
+                                <div class="pricing-header">
+                                    <h3>Basic</h3>
+                                    <div class="price">₹3,499<span>/month</span></div>
+                                </div>
+                                <div class="pricing-features">
+                                    <ul>
+                                        <li><i class="fas fa-check"></i> 5 creatives per month</li>
+                                        <li><i class="fas fa-check"></i> 2 revisions per design</li>
+                                        <li><i class="fas fa-check"></i> 48-hour delivery</li>
+                                        <li><i class="fas fa-check"></i> Email support</li>
+                                        <li class="disabled"><i class="fas fa-times"></i> Priority support</li>
+                                        <li class="disabled"><i class="fas fa-times"></i> Source files</li>
+                                    </ul>
+                                </div>
+                                <div class="pricing-cta">
+                                    <a href="#contact" class="btn btn-outline">Get Started</a>
+                                </div>
+                            </div>
+                            
+                            <div class="pricing-card featured" data-aos="fade-up" data-aos-delay="200">
+                                <div class="pricing-badge">Popular</div>
+                                <div class="pricing-header">
+                                    <h3>Standard</h3>
+                                    <div class="price">₹6,999<span>/month</span></div>
+                                </div>
+                                <div class="pricing-features">
+                                    <ul>
+                                        <li><i class="fas fa-check"></i> 10 creatives per month</li>
+                                        <li><i class="fas fa-check"></i> Unlimited revisions</li>
+                                        <li><i class="fas fa-check"></i> 24-hour delivery</li>
+                                        <li><i class="fas fa-check"></i> Priority support</li>
+                                        <li><i class="fas fa-check"></i> Source files included</li>
+                                        <li class="disabled"><i class="fas fa-times"></i> Dedicated designer</li>
+                                    </ul>
+                                </div>
+                                <div class="pricing-cta">
+                                    <a href="#contact" class="btn btn-primary">Get Started</a>
+                                </div>
+                            </div>
+                            
+                            <div class="pricing-card" data-aos="fade-up" data-aos-delay="300">
+                                <div class="pricing-header">
+                                    <h3>Premium</h3>
+                                    <div class="price">₹14,999<span>/month</span></div>
+                                </div>
+                                <div class="pricing-features">
+                                    <ul>
+                                        <li><i class="fas fa-check"></i> Unlimited creatives</li>
+                                        <li><i class="fas fa-check"></i> Unlimited revisions</li>
+                                        <li><i class="fas fa-check"></i> 12-hour delivery</li>
+                                        <li><i class="fas fa-check"></i> Priority support</li>
+                                        <li><i class="fas fa-check"></i> Source files included</li>
+                                        <li><i class="fas fa-check"></i> Dedicated designer</li>
+                                    </ul>
+                                </div>
+                                <div class="pricing-cta">
+                                    <a href="#contact" class="btn btn-outline">Get Started</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Individual Services -->
+                    <div class="tab-pane" id="individual">
+                        <div class="individual-pricing-grid">
+                            <div class="individual-service" data-aos="fade-up" data-aos-delay="100">
+                                <div class="service-icon">
+                                    <i class="fas fa-image"></i>
+                                </div>
+                                <h3>Thumbnail</h3>
+                                <div class="price">Starts from ₹599</div>
+                                <a href="#contact" class="btn btn-sm btn-outline">Inquire</a>
+                            </div>
+                            
+                            <div class="individual-service" data-aos="fade-up" data-aos-delay="200">
+                                <div class="service-icon">
+                                    <i class="fas fa-palette"></i>
+                                </div>
+                                <h3>Social Media Creatives</h3>
+                                <div class="price">Starts from ₹499</div>
+                                <a href="#contact" class="btn btn-sm btn-outline">Inquire</a>
+                            </div>
+                            
+                            <div class="individual-service" data-aos="fade-up" data-aos-delay="300">
+                                <div class="service-icon">
+                                    <i class="fas fa-film"></i>
+                                </div>
+                                <h3>Short Promotional Videos</h3>
+                                <div class="price">Starts from ₹2,799</div>
+                                <a href="#contact" class="btn btn-sm btn-outline">Inquire</a>
+                            </div>
+                            
+                            <div class="individual-service" data-aos="fade-up" data-aos-delay="400">
+                                <div class="service-icon">
+                                    <i class="fas fa-video"></i>
+                                </div>
+                                <h3>Reels</h3>
+                                <div class="price">Starts from ₹899</div>
+                                <a href="#contact" class="btn btn-sm btn-outline">Inquire</a>
+                            </div>
+                            
+                            <div class="individual-service" data-aos="fade-up" data-aos-delay="500">
+                                <div class="service-icon">
+                                    <i class="fas fa-object-group"></i>
+                                </div>
+                                <h3>Wedding Designs</h3>
+                                <div class="price">Starts from ₹999</div>
+                                <a href="#contact" class="btn btn-sm btn-outline">Inquire</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <h2>Let's Connect</h2>
+                <p>Ready to elevate your brand? Reach out through any of these channels</p>
+            </div>
+            <div class="contact-grid">
+                <div class="contact-channels" data-aos="fade-right">
+                    <div class="contact-card">
+                        <div class="contact-icon">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <h3>Business Hours</h3>
+                        <p>Monday - Friday: 9:00 AM - 6:00 PM</p>
+                        <p>Saturday: 10:00 AM - 4:00 PM</p>
+                        <p>Sunday: Closed</p>
+                    </div>
+                    <div class="contact-card">
+                        <div class="contact-icon">
+                            <i class="fas fa-phone-alt"></i>
+                        </div>
+                        <h3>Call or Email</h3>
+                        <p><a href="tel:+919348166802">+91 9348166802</a></p>
+                        <p><a href="mailto:theprotopixel@gmail.com">theprotopixel@gmail.com</a></p>
+                    </div>
+                </div>
+                <div class="contact-info" data-aos="fade-left">
+                    <div class="social-links">
+                        <a href="#" class="social-btn whatsapp">
+                            <i class="fab fa-whatsapp"></i>
+                            <span>Chat on WhatsApp</span>
+                        </a>
+                        <a href="mailto:theprotopixel@gmail.com" class="social-btn email">
+                            <i class="far fa-envelope"></i>
+                            <span>theprotopixel@gmail.com</span>
+                        </a>
+                        <a href="https://www.instagram.com/theprotopixel" class="social-btn instagram">
+                            <i class="fab fa-instagram"></i>
+                            <span>Follow on Instagram</span>
+                        </a>
+                    </div>
+                    <div class="contact-image">
+                        <img src="https://images.unsplash.com/photo-1600880292089-90a7e086ee0c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80" alt="Contact Us">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <a href="#">
+                        <img src="images/my logo.png" alt="TheProtoPixel Logo" class="footer-site-logo">
+                        <span class="footer-logo-text"><span class="highlight">TheProto</span>Pixel</span>
+                    </a>
+                    <p>Designs That Speak, <br> Creativity That Converts.</p>
+                </div>
+                <div class="footer-links">
+                    <div class="footer-column">
+                        <h4>Quick Links</h4>
+                        <ul>
+                            <li><a href="#home">Home</a></li>
+                            <li><a href="#services">Services</a></li>
+                            <li><a href="#portfolio">Portfolio</a></li>
+                            <li><a href="#clients">Clients</a></li>
+                            <li><a href="#pricing">Pricing</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-column">
+                        <h4>Services</h4>
+                        <ul>
+                            <li><a href="portfolio/thumbnails.html">Thumbnail Design</a></li>
+                            <li><a href="portfolio/shorts.html">Reels & Shorts</a></li>
+                            <li><a href="portfolio/social-media.html">Social Media</a></li>
+                            <li><a href="other-designs.html">Custom Designs</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-column">
+                        <h4>Connect</h4>
+                        <ul>
+                            <li><a href="#"><i class="fab fa-instagram"></i> Instagram</a></li>
+                            <li><a href="#"><i class="fab fa-behance"></i> Behance</a></li>
+                            <li><a href="#"><i class="fab fa-dribbble"></i> Dribbble</a></li>
+                            <li><a href="#"><i class="fab fa-linkedin"></i> LinkedIn</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 TheProtoPixel. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <a href="#" class="back-to-top">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+
+    <!-- Scripts -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+    <script src="js/script.js"></script>
+</body>
+</html>
