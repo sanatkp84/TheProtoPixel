@@ -1,8 +1,8 @@
-# Ignore large video files
-videos/*.mov
-videos/*.mp4
-videos/*.MOV
-videos/*.MP4
+# Video files are now allowed
+# videos/*.mov
+# videos/*.mp4
+# videos/*.MOV
+# videos/*.MP4
 
 # macOS system files
 .DS_Store
