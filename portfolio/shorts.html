@@ -174,6 +174,74 @@
         .portfolio-gallery-item:hover .play-button {
             transform: scale(1.1);
         }
+        
+        /* Download link styles */
+        .download-link {
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            background-color: rgba(255, 255, 255, 0.8);
+            color: var(--dark-color);
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 15;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+        
+        .portfolio-gallery-item:hover .download-link {
+            opacity: 1;
+        }
+        
+        .download-link:hover {
+            background-color: white;
+            transform: scale(1.1);
+        }
+        
+        /* Error message styles */
+        .video-error-message {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 15px 20px;
+            border-radius: 8px;
+            text-align: center;
+            z-index: 30;
+            max-width: 80%;
+            animation: fadeIn 0.3s ease;
+        }
+        
+        .video-error-message.fade-out {
+            animation: fadeOut 1s ease;
+        }
+        
+        .video-error-message p {
+            margin: 5px 0;
+        }
+        
+        .video-error-message a {
+            color: var(--primary-color);
+            text-decoration: underline;
+            font-weight: bold;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        @keyframes fadeOut {
+            from { opacity: 1; }
+            to { opacity: 0; }
+        }
     </style>
     <script>
         // JavaScript to handle video play/pause functionality
@@ -279,12 +347,18 @@
                 <!-- Item 1 -->
                 <div class="portfolio-gallery-item" data-tags="reels shorts promotion" data-aos="fade-up">
                     <div class="portfolio-gallery-img">
-                        <video id="video1" src="../videos/shubham bhaiya 1st p video.mp4" preload="metadata" controls></video>
+                        <video id="video1" preload="metadata" controls playsinline>
+                            <source src="../videos/shubham bhaiya 1st p video.mp4" type="video/mp4">
+                            Your browser does not support the video tag. <a href="../videos/shubham bhaiya 1st p video.mp4" download>Download the video</a> instead.
+                        </video>
                         <div class="video-overlay" onclick="playVideo('video1')">
                             <div class="play-button">
                                 <i class="fas fa-play"></i>
                             </div>
                         </div>
+                        <a href="../videos/shubham bhaiya 1st p video.mp4" download class="download-link">
+                            <i class="fas fa-download"></i>
+                        </a>
                     </div>
                     <div class="portfolio-gallery-info">
                         <h3>Train With Shubham</h3>
@@ -300,12 +374,18 @@
                 <!-- Item 2 -->
                 <div class="portfolio-gallery-item" data-tags="promotion shorts reels" data-aos="fade-up" data-aos-delay="100">
                     <div class="portfolio-gallery-img">
-                        <video id="video2" src="../videos/EDITED-MEME-V1-GRAPHY.mp4" preload="metadata" controls></video>
+                        <video id="video2" preload="metadata" controls playsinline>
+                            <source src="../videos/EDITED-MEME-V1-GRAPHY.mp4" type="video/mp4">
+                            Your browser does not support the video tag. <a href="../videos/EDITED-MEME-V1-GRAPHY.mp4" download>Download the video</a> instead.
+                        </video>
                         <div class="video-overlay" onclick="playVideo('video2')">
                             <div class="play-button">
                                 <i class="fas fa-play"></i>
                             </div>
                         </div>
+                        <a href="../videos/EDITED-MEME-V1-GRAPHY.mp4" download class="download-link">
+                            <i class="fas fa-download"></i>
+                        </a>
                     </div>
                     <div class="portfolio-gallery-info">
                         <h3>GRAPHY Promotional Video</h3>
@@ -321,12 +401,18 @@
                 <!-- Item 3 -->
                 <div class="portfolio-gallery-item" data-tags="promotion shorts reels" data-aos="fade-up" data-aos-delay="200">
                     <div class="portfolio-gallery-img">
-                        <video id="video3" src="../videos/FB audio .mp4" preload="metadata" controls></video>
+                        <video id="video3" preload="metadata" controls playsinline>
+                            <source src="../videos/FB audio .mp4" type="video/mp4">
+                            Your browser does not support the video tag. <a href="../videos/FB audio .mp4" download>Download the video</a> instead.
+                        </video>
                         <div class="video-overlay" onclick="playVideo('video3')">
                             <div class="play-button">
                                 <i class="fas fa-play"></i>
                             </div>
                         </div>
+                        <a href="../videos/FB audio .mp4" download class="download-link">
+                            <i class="fas fa-download"></i>
+                        </a>
                     </div>
                     <div class="portfolio-gallery-info">
                         <h3>Promotional Video for Debojyoti Boruah</h3>
@@ -342,12 +428,18 @@
                 <!-- Item 4 -->
                 <div class="portfolio-gallery-item" data-tags="promotion shorts reels" data-aos="fade-up" data-aos-delay="300">
                     <div class="portfolio-gallery-img">
-                        <video id="video4" src="../videos/client-VP-2-NEW GRAPHICS.mp4" preload="metadata" controls></video>
+                        <video id="video4" preload="metadata" controls playsinline>
+                            <source src="../videos/client-VP-2-NEW GRAPHICS.mp4" type="video/mp4">
+                            Your browser does not support the video tag. <a href="../videos/client-VP-2-NEW GRAPHICS.mp4" download>Download the video</a> instead.
+                        </video>
                         <div class="video-overlay" onclick="playVideo('video4')">
                             <div class="play-button">
                                 <i class="fas fa-play"></i>
                             </div>
                         </div>
+                        <a href="../videos/client-VP-2-NEW GRAPHICS.mp4" download class="download-link">
+                            <i class="fas fa-download"></i>
+                        </a>
                     </div>
                     <div class="portfolio-gallery-info">
                         <h3>GRAPHY Medium Paced Promotional Video</h3>
@@ -363,12 +455,18 @@
                 <!-- Item 5 -->
                 <div class="portfolio-gallery-item" data-tags="promotion shorts reels" data-aos="fade-up" data-aos-delay="400">
                     <div class="portfolio-gallery-img">
-                        <video id="video5" src="../videos/TWS Reel slow BGM.mp4" preload="metadata" controls></video>
+                        <video id="video5" preload="metadata" controls playsinline>
+                            <source src="../videos/TWS Reel slow BGM.mp4" type="video/mp4">
+                            Your browser does not support the video tag. <a href="../videos/TWS Reel slow BGM.mp4" download>Download the video</a> instead.
+                        </video>
                         <div class="video-overlay" onclick="playVideo('video5')">
                             <div class="play-button">
                                 <i class="fas fa-play"></i>
                             </div>
                         </div>
+                        <a href="../videos/TWS Reel slow BGM.mp4" download class="download-link">
+                            <i class="fas fa-download"></i>
+                        </a>
                     </div>
                     <div class="portfolio-gallery-info">
                         <h3>TWS Fast-Paced Reel </h3>
@@ -384,12 +482,18 @@
                 <!-- Item 6 -->
                 <div class="portfolio-gallery-item" data-tags="shorts reels" data-aos="fade-up" data-aos-delay="500">
                     <div class="portfolio-gallery-img">
-                        <video id="video6" src="../videos/DB ART 2ND VIDEO.mp4" preload="metadata" controls></video>
+                        <video id="video6" preload="metadata" controls playsinline>
+                            <source src="../videos/DB ART 2ND VIDEO.mp4" type="video/mp4">
+                            Your browser does not support the video tag. <a href="../videos/DB ART 2ND VIDEO.mp4" download>Download the video</a> instead.
+                        </video>
                         <div class="video-overlay" onclick="playVideo('video6')">
                             <div class="play-button">
                                 <i class="fas fa-play"></i>
                             </div>
                         </div>
+                        <a href="../videos/DB ART 2ND VIDEO.mp4" download class="download-link">
+                            <i class="fas fa-download"></i>
+                        </a>
                     </div>
                     <div class="portfolio-gallery-info">
                         <h3>Debojyoti Boruah Promotion Video</h3>
@@ -494,17 +598,47 @@
             try {
                 // Toggle play/pause
                 if (video.paused) {
-                    video.play()
-                        .then(() => {
-                            console.log('Video playing successfully');
-                            if (container) {
-                                container.classList.add('video-playing');
-                            }
-                        })
-                        .catch(error => {
-                            console.error('Error playing video:', error);
-                            alert('Could not play video. Please try again or check if your browser supports this video format.');
-                        });
+                    const playPromise = video.play();
+                    
+                    if (playPromise !== undefined) {
+                        playPromise
+                            .then(() => {
+                                console.log('Video playing successfully');
+                                if (container) {
+                                    container.classList.add('video-playing');
+                                }
+                            })
+                            .catch(error => {
+                                console.error('Error playing video:', error);
+                                
+                                // Show a more user-friendly error message
+                                const errorMessage = document.createElement('div');
+                                errorMessage.className = 'video-error-message';
+                                errorMessage.innerHTML = `
+                                    <p>This video cannot be played in your browser.</p>
+                                    <p><a href="${video.querySelector('source').src}" download>Download the video</a> to watch it.</p>
+                                `;
+                                
+                                // Add the error message to the container
+                                if (container) {
+                                    // Remove any existing error messages
+                                    const existingError = container.querySelector('.video-error-message');
+                                    if (existingError) {
+                                        existingError.remove();
+                                    }
+                                    
+                                    container.appendChild(errorMessage);
+                                    
+                                    // Auto-hide after 5 seconds
+                                    setTimeout(() => {
+                                        errorMessage.classList.add('fade-out');
+                                        setTimeout(() => {
+                                            errorMessage.remove();
+                                        }, 1000);
+                                    }, 5000);
+                                }
+                            });
+                    }
                 } else {
                     video.pause();
                     if (container) {
@@ -528,6 +662,37 @@
                     if (container) {
                         container.classList.remove('video-playing');
                     }
+                });
+                
+                // Add error event handler
+                video.addEventListener('error', function(e) {
+                    console.error('Video error:', e);
+                    const container = this.closest('.portfolio-gallery-img');
+                    const source = this.querySelector('source');
+                    
+                    if (container && source) {
+                        const errorMessage = document.createElement('div');
+                        errorMessage.className = 'video-error-message';
+                        errorMessage.innerHTML = `
+                            <p>This video cannot be played in your browser.</p>
+                            <p><a href="${source.src}" download>Download the video</a> to watch it.</p>
+                        `;
+                        
+                        // Remove any existing error messages
+                        const existingError = container.querySelector('.video-error-message');
+                        if (existingError) {
+                            existingError.remove();
+                        }
+                        
+                        container.appendChild(errorMessage);
+                    }
+                });
+            });
+            
+            // Add click event to download links to prevent video overlay triggering
+            document.querySelectorAll('.download-link').forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.stopPropagation();
                 });
             });
         });
